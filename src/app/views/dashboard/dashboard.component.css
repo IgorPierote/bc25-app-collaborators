@@ -1,0 +1,31 @@
+table {
+    width: 100%;
+}
+
+.table-container{
+    height: 70vh;
+    overflow: auto;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-new {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    background-color: lightskyblue;
+}
+
+
+
+

@@ -1,0 +1,33 @@
+.full-width {
+    width: 100%;
+}
+
+.double-width {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.double-width .full-width {
+    width: 48%;
+}
+
+.btn-submit {
+    margin-top: 30px;
+    background-color: #6b98f1;
+    color: aliceblue;
+}
+
+.btn-close {
+    margin-top: 30px;
+    background-color: #ca5656;
+    color: aliceblue;
+}
+
+.btn-submit:hover {
+    background-color: #316eea;
+}
+
+.btn-close:hover {
+    background-color: #ca2626;
+}
