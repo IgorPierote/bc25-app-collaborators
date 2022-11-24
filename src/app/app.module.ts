@@ -18,6 +18,8 @@ import { NewCollaboratorComponent } from './views/new-collaborator/new-collabora
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { EditCollaboratorComponent } from './views/edit-collaborator/edit-collaborator.component';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { DetailsComponent } from './components/details/details.component';
+import { AvatarPipe } from './pipes/avatar.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     HeaderComponent,
     DashboardComponent,
     NewCollaboratorComponent,
-    EditCollaboratorComponent
+    EditCollaboratorComponent,
+    DetailsComponent,
+    AvatarPipe
   ],
   imports: [
     BrowserModule,

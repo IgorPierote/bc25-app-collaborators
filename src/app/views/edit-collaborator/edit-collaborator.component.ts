@@ -1,10 +1,10 @@
+import { UploadService } from './../../services/upload.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CollaboratorService } from './../../services/collaborator.service';
 import { Collaborator } from './../../models/collaborator';
 import { NotificationService } from './../../services/notification.service';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'app-edit-collaborator',
@@ -14,6 +14,7 @@ import { UploadService } from 'src/app/services/upload.service';
 export class EditCollaboratorComponent implements OnInit {
 
   public collaborator!: Collaborator;
+
   public isLoadUpload: boolean = false;
 
   constructor(
@@ -22,17 +23,17 @@ export class EditCollaboratorComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private uploadService: UploadService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.initializeFields();
+    this.initilizeFields();
   }
 
-  private initializeFields(): void {
+  private initilizeFields(): void {
     const id = this.route.snapshot.params["id"];
     this.collaboratorService.findById(id).subscribe(collaborator => {
       this.collaborator = collaborator;
-    })
+    });
   }
 
   public updateCollaborator(form: NgForm): void {
@@ -43,20 +44,20 @@ export class EditCollaboratorComponent implements OnInit {
       });
     }
     else {
-      this.notification.showMenssage("Dados inválidos.");
+      this.notification. showMenssage("Dados inválidos.");
     }
   }
 
-  public uploadFile(event: any):void {
+  public uploadFile(event: any): void {
     this.isLoadUpload = true;
     const file: File = event.target.files[0];
-    this.uploadService.uploadFoto(file).subscribe(uploadResult =>{
+    this.uploadService.uploadFoto(file).subscribe(uploadResult  => {
       this.isLoadUpload = false;
       const storageReference = uploadResult.ref;
       const promiseFileUrl = storageReference.getDownloadURL();
       promiseFileUrl.then((fotoUrl: string) => {
         this.collaborator.fotoUrl = fotoUrl;
       })
-    });    
+    });
   }
 }

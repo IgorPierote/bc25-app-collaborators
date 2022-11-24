@@ -1,10 +1,10 @@
+import { UploadService } from './../../services/upload.service';
 import { Router } from '@angular/router';
 import { CollaboratorService } from './../../services/collaborator.service';
 import { Collaborator } from './../../models/collaborator';
 import { NotificationService } from './../../services/notification.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'app-new-collaborator',
@@ -14,8 +14,9 @@ import { UploadService } from 'src/app/services/upload.service';
 export class NewCollaboratorComponent implements OnInit {
 
   public formCollaborator: FormGroup;
-  private fotoUrl: string = "";
+
   public isLoadUpload: boolean = false;
+  private fotoUrl: string = "";
 
   constructor(
     fb: FormBuilder,
@@ -54,16 +55,16 @@ export class NewCollaboratorComponent implements OnInit {
     }
   }
 
-  public uploadFile(event: any):void {
+  public uploadFile(event: any): void {
     this.isLoadUpload = true;
     const file: File = event.target.files[0];
-    this.uploadService.uploadFoto(file).subscribe(uploadResult =>{
+    this.uploadService.uploadFoto(file).subscribe(uploadResult  => {
       this.isLoadUpload = false;
       const storageReference = uploadResult.ref;
       const promiseFileUrl = storageReference.getDownloadURL();
       promiseFileUrl.then((fotoUrl: string) => {
         this.fotoUrl = fotoUrl;
       })
-    });    
+    });
   }
 }

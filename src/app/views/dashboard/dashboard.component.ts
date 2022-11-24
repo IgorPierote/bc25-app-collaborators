@@ -2,6 +2,8 @@ import { CollaboratorService } from './../../services/collaborator.service';
 import { Collaborator } from './../../models/collaborator';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'src/app/services/notification.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DetailsComponent } from 'src/app/components/details/details.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +17,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private collaboratorService: CollaboratorService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private dialogue: MatDialog
     ) { }
 
   ngOnInit(): void {
@@ -32,6 +35,13 @@ export class DashboardComponent implements OnInit {
     this.collaboratorService.deleteCollaborator(id).subscribe(response => {
       this.notification.showMenssage("Colaborador Apagado.");
       this.initializeTable();
+    })
+  }
+
+  public openDetails(collaborator: Collaborator): void {
+    this.dialogue.open(DetailsComponent, {
+      width: "400px",
+      data: collaborator
     })
   }
 }
