@@ -17,6 +17,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { NewCollaboratorComponent } from './views/new-collaborator/new-collaborator.component';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { EditCollaboratorComponent } from './views/edit-collaborator/edit-collaborator.component';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { EditCollaboratorComponent } from './views/edit-collaborator/edit-collab
     ReactiveFormsModule,
     MaterialModule,
     AngularFirestoreModule,
-    FormsModule
+    FormsModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

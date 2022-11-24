@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(fb: FormBuilder, private authService: AuthService, private notification: NotificationService, private router: Router) {
     this.formLogin = fb.group({
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required]]
     });
   }
@@ -32,10 +32,14 @@ export class LoginComponent implements OnInit {
   }
   
   public singInEmailAndPassword(): void {
-    const user: User = this.formLogin.value;
-    this.authService.authenticateByEmailAndPassword(user).subscribe(credencials => {
+    if(this.formLogin.valid){
+      const user: User = this.formLogin.value;
+      this.authService.authenticateByEmailAndPassword(user).subscribe(credencials => {
       this.notification.showMenssage("Bem-Vindo(a)!")
       this.router.navigate(["/home"]);
     });
+    } else {
+      this.notification.showMenssage("Dados inválidos.")
+    }
   }
 }

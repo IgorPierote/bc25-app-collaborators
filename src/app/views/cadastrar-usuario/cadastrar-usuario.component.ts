@@ -17,7 +17,7 @@ export class CadastrarUsuarioComponent implements OnInit {
 
   constructor(fb: FormBuilder, private authService: AuthService, private router: Router, private notification: NotificationService) {
     this.formCadastro = fb.group({
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required]]
     });
   }
@@ -26,17 +26,21 @@ export class CadastrarUsuarioComponent implements OnInit {
   }
 
   public signInGoogle(): void {
-    this.authService.authenticateByGoogle().subscribe(credencials => {
+      this.authService.authenticateByGoogle().subscribe(credencials => {
       this.notification.showMenssage("Autenticado com Google!");
     })
   }
 
   public createUserEmailAndPassword(): void {
-    const user: User = this.formCadastro.value;
-    this.authService.createUserEmailAndPassword(user).subscribe(response => {
+    if(this.formCadastro.valid){
+      const user: User = this.formCadastro.value;
+      this.authService.createUserEmailAndPassword(user).subscribe(response => {
       this.notification.showMenssage("Usuário cadastrado.");
       this.router.navigate(["/login"]);
     });
+    } else {
+      this.notification.showMenssage("Dados invválidos.")
+    }
   }
 
 }

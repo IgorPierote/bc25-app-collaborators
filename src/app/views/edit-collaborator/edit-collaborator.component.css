@@ -31,3 +31,15 @@
 .btn-close:hover {
     background-color: #ca2626;
 }
+
+.upload-photo {
+    width: 100%;
+    padding: 10px 20px;
+    border: 1px solid #bababa;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.upload-photo::-webkit-file-upload-button {
+    display: none;
+}
